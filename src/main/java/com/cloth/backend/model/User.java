@@ -1,28 +1,38 @@
 package com.cloth.backend.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="emp")
 public class User {
-    private User(){};
+    @Id
+    private int id;
+    private String name;
+    private int age;
 
-    private static final User user=new User();
-
-    public static User  getInstance(){
-        return user;
+    public int getId() {
+        return id;
     }
 
-
-    public void show(){
-        System.out.println("Work");
+    public void setId(int id) {
+        this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public static void main(String[] args){
-        User u1=User.getInstance();
-        u1.show();
-        List<String> lsi =new ArrayList<>();
+    public int getAge() {
+        return age;
+    }
 
+    public void setAge(int age) {
+        this.age = age;
     }
 }

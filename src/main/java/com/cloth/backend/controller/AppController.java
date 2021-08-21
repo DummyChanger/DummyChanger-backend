@@ -1,10 +1,13 @@
 package com.cloth.backend.controller;
 
 import com.cloth.backend.Services.UserService;
+import com.cloth.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -13,7 +16,7 @@ public class AppController {
     private UserService userService;
 
     @GetMapping
-    public String userDetails(){
+    public List<User> userDetails(){
         return userService.getUserDetails();
     }
 }
