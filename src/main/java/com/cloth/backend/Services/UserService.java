@@ -17,8 +17,12 @@ public class UserService  {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> getUserDetails(){
+    public List<User> getUserDetails() {
         return userRepository.findAll();
+    }
+
+    public void addUser(User user) throws Exception{
+        userRepository.save(user);
     }
 
 }
