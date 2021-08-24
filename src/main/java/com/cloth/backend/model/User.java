@@ -1,35 +1,24 @@
 package com.cloth.backend.model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String name;
-    private String email;
+    private String userName;
     private String password;
-    private String level;
+    private boolean active;
+    private String role;
 
-    public User() {
-    }
-    public User(String name, String email, String password, String level) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.level = level;
-    }
-
-    public User(int id, String name, String email, String password, String level) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.level = level;
-    }
-
+    @javax.persistence.Id
     public int getId() {
         return id;
     }
@@ -38,20 +27,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -62,22 +43,32 @@ public class User {
         this.password = password;
     }
 
-    public String getLevel() {
-        return level;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
+                ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
-                ", level='" + level + '\'' +
+                ", active=" + active +
+                ", role='" + role + '\'' +
                 '}';
     }
+
+
 }
