@@ -2,9 +2,11 @@ package com.cloth.backend.Services;
 
 import com.cloth.backend.model.Role;
 import com.cloth.backend.model.User;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface UserService {
     List<User> getUsers();
 
@@ -15,6 +17,5 @@ public interface UserService {
     void addRoleToUser(String userName, String roleName);
 
     User getUser(String userName);
-
-//    User login(String userName, String password);
+    
 }

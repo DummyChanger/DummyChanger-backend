@@ -5,24 +5,21 @@ import com.cloth.backend.model.Role;
 import com.cloth.backend.model.User;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api")
 public class AppController {
-    private UserService userService;
+    @Autowired
+    UserService userService;
 
-//    @GetMapping("/user/login")
-//    public ResponseEntity<User> userLogin(@RequestBody LoginReq login) {
-//        return ResponseEntity.ok().body(userService.login(login.getUsername(), login.getPassword()));
-//    }
-
-    @GetMapping("/users")
+    @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
@@ -42,10 +39,11 @@ public class AppController {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
     }
-}
 
-@Data
-class RoleToUserForm {
-    private String username;
-    private String roleName;
+    @Data
+    static
+    class RoleToUserForm {
+        private String username;
+        private String roleName;
+    }
 }
