@@ -15,4 +15,6 @@ public interface UserService {
     void addRoleToUser(String userName, String roleName);
 
     User getUser(String userName);
+
+//    User login(String userName, String password);
 }

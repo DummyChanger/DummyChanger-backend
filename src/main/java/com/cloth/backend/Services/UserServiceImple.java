@@ -37,17 +37,23 @@ public class UserServiceImple implements UserService {
         return roleRepository.save(role);
     }
 
+//    @Override
+//    public User login(String userName, String password) {
+//
+//        return;
+//    }
+
     @Override
-    public void addRoleToUser(String userName, String roleName) {
+    public void addRoleToUser(String username, String roleName) {
         log.info("add new role");
-        User user = userRepository.findByUserName(userName);
-        Role role = roleRepository.findByName(roleName);
+        User user = userRepository.findByUsername(username);
+        Role role = roleRepository.findByName(username);
         user.getRole().add(role);
     }
 
     @Override
-    public User getUser(String userName) {
-        log.info("get  user {} form database", userName);
-        return userRepository.findByUserName(userName);
+    public User getUser(String username) {
+        log.info("get  user {} form database", username);
+        return userRepository.findByUsername(username);
     }
 }
