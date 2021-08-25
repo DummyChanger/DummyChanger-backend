@@ -21,21 +21,25 @@ public class UserServiceImple implements UserService {
 
     @Override
     public List<User> getUsers() {
+        log.info("get all user form database");
         return userRepository.findAll();
     }
 
     @Override
     public User saveUser(User user) {
+        log.info("save user {}", user.getUsername());
         return userRepository.save(user);
     }
 
     @Override
     public Role saveRole(Role role) {
+        log.info("save role {}", role.getName());
         return roleRepository.save(role);
     }
 
     @Override
     public void addRoleToUser(String userName, String roleName) {
+        log.info("add new role");
         User user = userRepository.findByUserName(userName);
         Role role = roleRepository.findByName(roleName);
         user.getRole().add(role);
@@ -43,6 +47,7 @@ public class UserServiceImple implements UserService {
 
     @Override
     public User getUser(String userName) {
+        log.info("get  user {} form database", userName);
         return userRepository.findByUserName(userName);
     }
 }
