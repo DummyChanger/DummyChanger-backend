@@ -7,12 +7,15 @@ import com.cloth.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -27,8 +30,19 @@ public class UserServiceImple implements UserService, UserDetailsService {
     private final RoleRepository roleRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            log.info("User not found in database");
+            throw new UsernameNotFoundException("User not found in database");
+        } else {
+            log.info("User found in database");
+        }
+        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        user.getRole().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
 
     @Override

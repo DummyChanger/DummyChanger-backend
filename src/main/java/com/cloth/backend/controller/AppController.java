@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,7 @@ import java.util.List;
 public class AppController {
     @Autowired
     UserService userService;
+
 
     @GetMapping(value = "/users")
     public ResponseEntity<List<User>> getUsers() {
